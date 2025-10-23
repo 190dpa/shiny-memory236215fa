@@ -1,0 +1,31 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model StockItem {
+  id       String @id
+  name     String
+  emoji    String
+  quantity Int
+  price    Float
+  max      Int
+}
+
+model DeliveryRecord {
+  id            Int      @id @default(autoincrement())
+  timestamp     DateTime @default(now())
+  mention       String?
+  itemId        String
+  itemName      String
+  quantity      Int
+  photoUrl      String?
+  webhookSent   Boolean
+  webhookStatus Int
+}
